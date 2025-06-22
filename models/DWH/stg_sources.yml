@@ -1,0 +1,7 @@
+sources:
+  - name: stage
+    database: stage
+    schema: public
+    tables:
+      - name: src_emp      
+        identifier: stg_employee

@@ -1,0 +1,29 @@
+sources:
+  - name: src_retail
+    database: learndbt
+    schema: retail
+    tables:
+     - name: src_country
+       identifier: nation
+     - name: src_region
+       identifier: region
+     - name: src_customer
+       identifier: customer
+  - name: src_snow
+    database: SNOWFLAKE_SAMPLE_DATA
+    schema: TPCH_SF1
+    tables: 
+      - name: nation  
+        identifier: nation
+  - name: dbtlog
+    database: dbtlog
+    schema:  audit  
+    tables:
+      - name : audit_table
+        identifier: audit_log_dbt
+  - name: dbtlog_inf_meta
+    database: dbtlog
+    schema:  information_schema   
+    tables:
+      - name: tables
+        identifier: tables
