@@ -1,0 +1,52 @@
+snapshots: 
+  - name: dim_emp_scd2_check_msof
+    relation : source('stage','src_emp')
+    config:
+      database: dwh
+      schema: public
+      unique_key: id
+      strategy: check
+      check_cols: [name, salary]
+  - name: dim_emp_scd2_ts_msof
+    relation: source('stage','src_emp')
+    config:
+      database: dwh
+      schema: public
+      strategy: timestamp
+      unique_key: id
+      updated_at: src_load_date
+  - name: dim_emp_scd2_ts_harddel_invalid
+    relation: source('stage','src_emp')
+    config:
+      database: dwh
+      schema: public
+      strategy: timestamp
+      unique_key: id
+      updated_at: src_load_date
+      hard_deletes: 'invalidate'
+  - name : dim_emp_scd2_ts_harddel_newrec
+    relation: source('stage','src_emp')
+    config:
+      database: dwh
+      schema: public
+      strategy: timestamp
+      unique_key: id
+      updated_at: src_load_date
+      hard_deletes: 'new_record'  
+  - name : dim_emp_scd2_ts_harddel_newrec_meta_col_end_dt
+    relation: source('stage','src_emp')
+    config:
+      database: dwh
+      schema: public
+      pre_hook: 'ALTER SESSION SET TIMEZONE = "America/New_York"'
+      strategy: timestamp
+      unique_key: id
+      updated_at: src_load_date
+      dbt_valid_to_current: '2099-12-31 01:02:03.123'
+      hard_deletes: 'new_record'  
+      snapshot_meta_column_names:
+        dbt_valid_from: start_date
+        dbt_valid_to: end_date
+        dbt_scd_id : md5_scd_id
+        dbt_updated_at: modified_date
+        dbt_is_deleted:  is_deleted 

@@ -1,0 +1,9 @@
+snapshots: 
+  - name: dim_emp_scd2_check
+    relation: source('stage','src_emp')
+    config:
+      database: dwh
+      schema: public
+      strategy: check
+      unique_key: id
+      check_cols: [name,salary]

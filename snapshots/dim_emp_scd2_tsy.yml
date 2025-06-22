@@ -1,0 +1,9 @@
+snapshots: 
+  - name: dim_emp_scd2_tsy
+    relation: source('stage','src_emp')
+    config:
+      database: dwh
+      schema: public
+      strategy: timestamp
+      unique_key: id
+      updated_at: src_load_date
